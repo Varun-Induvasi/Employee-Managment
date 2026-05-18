@@ -1,3 +1,12 @@
+<%@page import="com.empapp.dao.impl.DeptDAOImpl"%>
+<%@page import="com.empapp.dao.DeptDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.empapp.dao.impl.EmployeeDAOImpl"%>
+<%@page import="com.empapp.dao.EmployeeDAO"%>
+<%@page import="com.empapp.dto.Employee"%>
+<%@page import="com.empapp.dto.Dept"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +32,14 @@
                    
                     <div class="overflow-x-auto mt-4">
                     
+                    <%EmployeeDAO edao=new EmployeeDAOImpl(); %>
+                    <%List<Employee> elist=edao.findAll(); %>
+                    
+                    
+                    <%DeptDAO ddao=new DeptDAOImpl(); %>
+                    <%List<Dept> dlist=ddao.findAll(); %>
+                    
+                    
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100">
@@ -34,41 +51,26 @@
                                  </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="p-3">EMP002</td>
-                                    <td class="p-3 font-medium">Sarah Williams</td>
-                                    <td class="p-3">QA Tester</td>
-                                    <td class="p-3">sarah@company.com</td>
-                                    <td class="p-3">+1 (555) 234-5678</td>
-                                 </tr>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="p-3">EMP003</td>
-                                    <td class="p-3 font-medium">Michael Chen</td>
-                                    <td class="p-3">Frontend Developer</td>
-                                    <td class="p-3">michael@company.com</td>
-                                    <td class="p-3">+1 (555) 345-6789</td>
-                                 </tr>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="p-3">EMP004</td>
-                                    <td class="p-3 font-medium">Emily Rodriguez</td>
-                                    <td class="p-3">Backend Developer</td>
-                                    <td class="p-3">emily@company.com</td>
-                                    <td class="p-3">+1 (555) 456-7890</td>
-                                 </tr>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="p-3">EMP005</td>
-                                    <td class="p-3 font-medium">David Kim</td>
-                                    <td class="p-3">DevOps Engineer</td>
-                                    <td class="p-3">david@company.com</td>
-                                    <td class="p-3">+1 (555) 567-8901</td>
-                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-3">EMP006</td>
-                                    <td class="p-3 font-medium">Lisa Park</td>
-                                    <td class="p-3">UI/UX Designer</td>
-                                    <td class="p-3">lisa@company.com</td>
-                                    <td class="p-3">+1 (555) 678-9012</td>
-                                 </tr>
+                            <%if(elist!=null && !elist.isEmpty()){ %>
+                            	<%for(Employee e:elist){%>
+                            	
+	                                <tr class="border-b hover:bg-gray-50">
+	                                    <td class="p-3"><%=e.getId() %></td>
+	                                    <td class="p-3 font-medium"><%=e.getName() %></td>
+	                                    <td class="p-3"><%=e.getJob() %></td>
+	                                    <td class="p-3"><%=e.getMail() %></td>
+	                                    
+	                                 </tr>
+                            	<%} %>
+                            <%} else{%>
+                             	<tr>
+							        <td colspan="5" class="text-center p-3 text-gray-500">
+							            No employees found
+							        </td>
+							    </tr>
+                            <%} %>
+                             
+                                
                             </tbody>
                         </table>
                     </div>

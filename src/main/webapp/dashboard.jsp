@@ -54,7 +54,7 @@
 </head>
 <body class="bg-gray-900 min-h-screen">
 
-	<%Employee e=(Employee)request.getAttribute("employee"); %>
+	<%Employee e=(Employee)session.getAttribute("employee"); %>
 	
     <input type="radio" name="tab" id="tab-profile" class="tab-radio" checked>
 

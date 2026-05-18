@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class Login extends HttpServlet{
@@ -25,7 +26,9 @@ public class Login extends HttpServlet{
 		Employee e=edao.findByMailandPassword(req.getParameter("mail"), req.getParameter("password"));
 		
 		if(e!=null) {
-			req.setAttribute("employee", e);
+			HttpSession session=req.getSession();
+			session.setAttribute("employee", e);
+			req.setAttribute("success","Login successfull");
 			RequestDispatcher rd=req.getRequestDispatcher("dashboard.jsp");
 		    rd.forward(req, resp);
 		}else {

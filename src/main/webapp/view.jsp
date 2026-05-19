@@ -36,8 +36,8 @@
                     <%List<Employee> elist=edao.findAll(); %>
                     
                     
-                    <%DeptDAO ddao=new DeptDAOImpl(); %>
-                    <%List<Dept> dlist=ddao.findAll(); %>
+                    
+                    
                     
                     
                         <table class="w-full border-collapse">
@@ -47,19 +47,20 @@
                                     <th class="p-3 text-left text-sm font-semibold">Name</th>
                                     <th class="p-3 text-left text-sm font-semibold">Job Position</th>
                                     <th class="p-3 text-left text-sm font-semibold">Email</th>
-                                    <th class="p-3 text-left text-sm font-semibold">Phone</th>
+                                    <th class="p-3 text-left text-sm font-semibold">Dept Name</th>
                                  </tr>
                             </thead>
                             <tbody>
-                            <%if(elist!=null && !elist.isEmpty()){ %>
+                            <%if(elist!=null && !elist.isEmpty() ){ %>
                             	<%for(Employee e:elist){%>
-                            	
+                            		<%DeptDAO ddao=new DeptDAOImpl(); %>
+                            		<%Dept d=ddao.findById(e.getDno()); %>
 	                                <tr class="border-b hover:bg-gray-50">
-	                                    <td class="p-3"><%=e.getId() %></td>
-	                                    <td class="p-3 font-medium"><%=e.getName() %></td>
-	                                    <td class="p-3"><%=e.getJob() %></td>
-	                                    <td class="p-3"><%=e.getMail() %></td>
-	                                    
+	                                    <td class="p-3"><%=e.getId()%></td>
+	                                    <td class="p-3 font-medium"><%=e.getName()%></td>
+	                                    <td class="p-3"><%=e.getJob()%></td>
+	                                    <td class="p-3"><%=e.getMail()%></td>
+	                                    <td class="p-3"><%=d.getDname()%></td>
 	                                 </tr>
                             	<%} %>
                             <%} else{%>
